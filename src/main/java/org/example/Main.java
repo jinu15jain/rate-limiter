@@ -38,5 +38,21 @@ public class Main {
             Thread.sleep(200);
         }
 
+
+        SlidingWindowCounterRateLimiter slidingWindowCounterRateLimiter = new SlidingWindowCounterRateLimiter(5, 1); // 5 permits per second, window size of 1 second
+
+        // Simulate 10 requests
+        for (int i = 0; i < 10; i++) {
+            System.out.println("Request " + (i + 1) + ": " + (slidingWindowCounterRateLimiter.acquire() ? "Allowed" : "Denied"));
+            Thread.sleep(200);
+        }
+
+        SlidingWindowCounterSubWindowRateLimiter limiter = new SlidingWindowCounterSubWindowRateLimiter(5,1 , 1); // 5 permits per second, window size of 1 second
+
+        // Simulate 10 requests
+        for (int i = 0; i < 10; i++) {
+            System.out.println("Request " + (i + 1) + ": " + (limiter.acquire() ? "Allowed" : "Denied"));
+            Thread.sleep(200);
+        }
     }
 }
